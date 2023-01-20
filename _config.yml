@@ -6,13 +6,13 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Boheng Li's Homepage"
-description              : "Undergraduate student at Wuhan University."
-repository               : "AntigoneRandy/liboheng.github.io"
+title                    : "Gaoxiang Tang's Homepage"
+description              : "Undergraduate student at Renmin University of China."
+repository               : "GaoxiangTang/gaoxiangtang.github.io"
 google_scholar_stats_use_cdn : true
 
 # google analytics
-google_analytics_id      :  G-NMW1J07WPJ # get google_analytics_id from https://analytics.google.com/analytics/
+google_analytics_id      :  #G-NMW1J07WPJ # get google_analytics_id from https://analytics.google.com/analytics/
 
 # SEO Related
 google_site_verification :  # get google_site_verification from https://search.google.com/search-console/about
@@ -21,14 +21,14 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 
 # Site Author
 author:
-  name             : "Boheng Li (李勃衡)"
+  name             : "Gaoxiang Tang(唐高翔)"
   avatar           : "images/android-chrome-512x512.png"
-  bio              : "Wuhan University"
-  location         : "Wuhan, Hubei, China"
+  bio              : "Renmin University of China"
+  location         : "Haidian, Beijing, China"
   employer         :
   pubmed           : 
   # googlescholar    : "https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID"
-  email            : "antigonerandy@whu.edu.cn"
+  email            : "tanggaoxiang@ruc.edu.cn"
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -43,7 +43,7 @@ author:
   instagram        :
   impactstory      : # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : boheng-li-806753238/ # e.g., "linkedin username"
+  linkedin         : #boheng-li-806753238/ # e.g., "linkedin username"
   dblp             : # e.g., "https://dblp.org/pid/xx/xxxx.html"
   orcid            : # e.g., "https://orcid.org/xxxx"
   pinterest        :

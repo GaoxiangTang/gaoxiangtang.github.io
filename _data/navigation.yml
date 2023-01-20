@@ -3,14 +3,14 @@ main:
   - title: "About Me"
     url: "/#about-me"
 
-  - title: "News"
-    url: "/#-news"
+  #- title: "News"
+  #  url: "/#-news"
 
-  - title: "Publications"
-    url: "/#-publications"
+  #- title: "Publications"
+  #  url: "/#-publications"
 
-  - title: "Competition Awards"
-    url: "/#-competition-awards"
+  #- title: "Competition Awards"
+  #  url: "/#-competition-awards"
 
   - title: "Scholarships and Honors"
     url: "/#-scholarships-and-honors"
@@ -18,8 +18,9 @@ main:
   - title: "Educations"
     url: "/#-educations"
 
-  - title: "Activities"
-    url: "/#-activities"
+  - title: "Research Experiences"
+    url: "/#-research-experiences"
 
-  # - title: "Internships"
-  #   url: "/#-internships"
+  - title: "Internships"
+    url: "/#-internships"
+   
