@@ -47,3 +47,7 @@ My curriculum vitae can be downloaded [here (in English)](https://github.com/Gao
 # 💻 Internships
 
 - *2023.01 - now*, Research Intern, [Beijing Academy of Quantum Information Sciences](http://en.baqis.ac.cn/)
+  - Write a Python program utilizing the STL model of a surface electrode ion trap and use Boundary Element Method to calculate the potential field distribution inside the trap  when voltages are applied to the electrodes.
+  - Use the above results to optimize the setting of voltages during ion shuttling.
+  - Code is open source at https://github.com/GaoxiangTang/junction-trap-simulation.
+
