@@ -19,11 +19,9 @@ redirect_from:
 
 Hi there 👋👋 !
 
-My name is Gaoxiang Tang(唐高翔), I'm currently a junior undergraduate student at the [School of Science ](http://lxy.ruc.edu.cn/), [Renmin University of China (RUC)](https://www.ruc.edu.cn/), pursuing a B.S. degree in Physics. I graduated from [Chengdu Foreign Languages School (CFLS)](http://www.cfls.net.cn/), where I spent 1 year learning Olympic in Informatics (OI).
+My name is Gaoxiang Tang(唐高翔), I'm currently a junior undergraduate student at the [School of Science ](http://lxy.ruc.edu.cn/), [Renmin University of China (RUC)](https://www.ruc.edu.cn/), pursuing a B.S. degree in Physics. In 2024, I will begin my doctoral studies at Tsinghua University's [Institute for Interdisciplinary Information Sciences](https://iiis.tsinghua.edu.cn/), under the supervision of Professor [Yuka Wu](https://iiis.tsinghua.edu.cn/zh/wyk/). 
 
 My research interest lies in quantum computation based on trapped ions. It's a fortune to be supervised by Prof. [Siang Zhang](https://siangzhang.github.io/contact) and to have the opportunity to work at TIQS(Trapped Ion Quantum Science), the lab facility operated by his group. During my undergraduate study, I was involved in the experimental realization of [PT symmetric Hamiltonian mediated state discrimination](https://royalsocietypublishing.org/doi/full/10.1098/rsta.2012.0160) in a single-ion trap and the implementation of [micromotion minimization methods](https://arxiv.org/abs/2107.00056) on the device TIQS.
-
-🌟🌟 I'm currently actively seeking for Ph.D., Research Assistant, or internship positions related to Quantum Information. If you're interested in working with me, don't hesitate to drop me an email. 
 
 My curriculum vitae can be downloaded [here (in English)](https://github.com/GaoxiangTang/gaoxiangtang.github.io/raw/main/docs/TGX_CV_en.pdf) or [here (in Chinese)](https://github.com/GaoxiangTang/gaoxiangtang.github.io/raw/main/docs/TGX_CV_zh.pdf) .
 
