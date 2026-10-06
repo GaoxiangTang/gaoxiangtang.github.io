@@ -6,9 +6,12 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Lorem ipsum"
-description              : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. "
-repository               : "RayeRen/acad-homepage.github.io"
+title                    : "Gaoxiang Tang"
+description              : "Ph.D. student at IIIS, Tsinghua University. Quantum error correction and trapped-ion quantum computing."
+repository               : "GaoxiangTang/gaoxiangtang.github.io"
+url                      : "https://gaoxiangtang.github.io"
+baseurl                  : ""
+google_scholar_stats_enabled : false
 google_scholar_stats_use_cdn : true
 
 # google analytics
@@ -21,14 +24,14 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 
 # Site Author
 author:
-  name             : "Lorem ipsum"
-  avatar           : "images/android-chrome-512x512.png"
-  bio              : "Lorem ipsum College"
+  name             : "Gaoxiang Tang / 唐高翔"
+  avatar           :
+  bio              : "Ph.D. student · IIIS, Tsinghua University"
   location         : "Beijing, China"
   employer         :
   pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID"
-  email            : "Lorem@ipsum.com"
+  googlescholar    : "https://scholar.google.com/citations?user=uuufp28AAAAJ"
+  email            : "tgx24@mails.tsinghua.edu.cn"
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -37,7 +40,7 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : # e.g., "github username"
+  github           : "GaoxiangTang"
   google_plus      :
   keybase          :
   instagram        :
@@ -128,6 +131,14 @@ defaults:
       author_profile: true
 
 
+  # Blog posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author_profile: true
+
 # Sass/SCSS
 sass:
   sass_dir: _sass
@@ -135,7 +146,7 @@ sass:
 
 
 # Outputting
-permalink: /:categories/:title/
+permalink: /blog/:year/:month/:day/:title/
 timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 

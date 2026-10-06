@@ -1,0 +1,9 @@
+---
+layout: default
+---
+<header class="post-header">
+  <h1>{{ page.title | escape }}</h1>
+  <p><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+</header>
+{{ content }}
+<p class="post-back"><a href="{{ '/#blogs' | relative_url }}">← Back to Blogs</a></p>

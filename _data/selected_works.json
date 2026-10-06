@@ -1,0 +1,183 @@
+[
+  {
+    "title": "Frequency-Multiplexed Parallel Gates for Quantum LDPC Codes in a Two-Dimensional Ion Crystal",
+    "date": "2026-09-03",
+    "date_basis": "First arXiv submission",
+    "venue": "arXiv:2609.04081 (2026)",
+    "url": "https://arxiv.org/abs/2609.04081",
+    "arxiv": "2609.04081",
+    "scholar_id": "zYLM7Y9cAGgC",
+    "authors": [
+      {
+        "name": "G.-X. Tang",
+        "own": true,
+        "equal": false,
+        "corresponding": false
+      },
+      {
+        "name": "L.-M. Duan",
+        "own": false,
+        "equal": false,
+        "corresponding": true
+      },
+      {
+        "name": "Y.-K. Wu",
+        "own": false,
+        "equal": false,
+        "corresponding": true
+      }
+    ],
+    "author_note_source": "https://arxiv.org/html/2609.04081v1"
+  },
+  {
+    "title": "Stretched exponential scaling of parity-restricted energy gaps in a random transverse-field Ising model",
+    "date": "2026-04-09",
+    "date_basis": "Journal publication",
+    "venue": "Physical Review B 113, 144415 (2026)",
+    "url": "https://doi.org/10.1103/v686-2c9f",
+    "arxiv": "2512.03526",
+    "scholar_id": "qjMakFHDy7sC",
+    "authors": [
+      {
+        "name": "G.-X. Tang",
+        "own": true,
+        "equal": true,
+        "corresponding": false
+      },
+      {
+        "name": "J.-Z. Zhuang",
+        "own": false,
+        "equal": true,
+        "corresponding": false
+      },
+      {
+        "name": "L.-M. Duan",
+        "own": false,
+        "equal": false,
+        "corresponding": true
+      },
+      {
+        "name": "Y.-K. Wu",
+        "own": false,
+        "equal": false,
+        "corresponding": true
+      }
+    ],
+    "author_note_source": "https://journals.aps.org/prb/abstract/10.1103/v686-2c9f"
+  },
+  {
+    "title": "Performance analysis for crosstalk errors between parallel entangling gates in trapped-ion quantum error correction",
+    "date": "2025-07-16",
+    "date_basis": "Journal publication",
+    "venue": "Physical Review Applied 24, 014032 (2025)",
+    "url": "https://doi.org/10.1103/c7w3-pxls",
+    "arxiv": "2501.09554",
+    "scholar_id": "u5HHmVD_uO8C",
+    "authors": [
+      {
+        "name": "Fangxuan Liu",
+        "own": false,
+        "equal": true,
+        "corresponding": false
+      },
+      {
+        "name": "Gaoxiang Tang",
+        "own": true,
+        "equal": true,
+        "corresponding": false
+      },
+      {
+        "name": "Luming Duan",
+        "own": false,
+        "equal": false,
+        "corresponding": false
+      },
+      {
+        "name": "Yukai Wu",
+        "own": false,
+        "equal": false,
+        "corresponding": true
+      }
+    ],
+    "author_note_source": "https://journals.aps.org/prapplied/abstract/10.1103/c7w3-pxls"
+  },
+  {
+    "title": "Robust Mølmer-Sørensen gate against symmetric and asymmetric errors",
+    "date": "2025-04-25",
+    "date_basis": "Journal publication",
+    "venue": "Quantum Science and Technology 10, 035009 (2025)",
+    "url": "https://doi.org/10.1088/2058-9565/adce29",
+    "arxiv": "2501.02847",
+    "scholar_id": "u-x6o8ySG0sC",
+    "authors": [
+      {
+        "name": "Wenhao Zhang",
+        "own": false,
+        "equal": true,
+        "corresponding": false
+      },
+      {
+        "name": "Gaoxiang Tang",
+        "own": true,
+        "equal": true,
+        "corresponding": false
+      },
+      {
+        "name": "Kecheng Liu",
+        "own": false,
+        "equal": false,
+        "corresponding": false
+      },
+      {
+        "name": "Xiao Yuan",
+        "own": false,
+        "equal": false,
+        "corresponding": false
+      },
+      {
+        "name": "Yangchao Shen",
+        "own": false,
+        "equal": false,
+        "corresponding": true
+      },
+      {
+        "name": "Yukai Wu",
+        "own": false,
+        "equal": false,
+        "corresponding": true
+      },
+      {
+        "name": "Xiao-Ming Zhang",
+        "own": false,
+        "equal": false,
+        "corresponding": true
+      }
+    ],
+    "author_note_source": "https://arxiv.org/html/2501.02847v1",
+    "publication_metadata_source": "https://api.crossref.org/works/10.1088/2058-9565/adce29"
+  },
+  {
+    "title": "Clustering-Based Sub-QUBO Extraction for Hybrid QUBO Solvers",
+    "date": "2025-02-22",
+    "date_basis": "First arXiv submission",
+    "venue": "arXiv:2502.16212 (2025)",
+    "url": "https://arxiv.org/abs/2502.16212",
+    "arxiv": "2502.16212",
+    "scholar_id": "9yKSN-GCB0IC",
+    "authors": [
+      {
+        "name": "Wending Zhao",
+        "own": false,
+        "equal": false,
+        "corresponding": false
+      },
+      {
+        "name": "Gaoxiang Tang",
+        "own": true,
+        "equal": false,
+        "corresponding": true
+      }
+    ],
+    "author_note_source": "https://arxiv.org/html/2502.16212v2"
+  }
+]
