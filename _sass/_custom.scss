@@ -22,10 +22,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", 
 .author__name-zh { display: block; font-size: .78em; font-weight: 400; margin-top: .4em; }
 .sidebar .author__bio, .sidebar .author__research { font-size: .9em; line-height: 1.6; margin: .8em 0; }
 .author__urls-wrapper { display: block; margin-left: 0; cursor: default; }
-.author__urls { display: block; position: static; margin: 1em 0 0; padding: 0; border: 0; background: transparent; box-shadow: none; z-index: auto; }
+.author__urls { display: flex; flex-wrap: wrap; gap: .4em; position: static; margin: 1em 0 0; padding: 0; border: 0; background: transparent; box-shadow: none; z-index: auto; }
 .author__urls:before, .author__urls:after { display: none; }
 .author__urls li { white-space: normal; }
-.author__urls a { overflow-wrap: anywhere; }
+.author__urls a { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; min-height: 36px; padding: 0; margin: 0; font-size: 1.35em; text-decoration: none; }
+.author__urls a:hover { text-decoration: none; }
+.author__urls a:focus-visible { outline: 2px solid #224b8d; outline-offset: 2px; border-radius: 4px; }
 .blog-list { list-style: none; padding-left: 0; }
 .blog-list time { color: #667085; margin-right: 1em; }
 .post-header p { color: #667085; }
@@ -40,6 +42,5 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", 
   .author__urls { margin-top: 0; }
   .author__name-zh { display: inline; margin-left: .4em; }
   .sidebar .author__research { display: none; }
-  .author__urls { display: flex; flex-wrap: wrap; column-gap: 1em; row-gap: .3em; font-size: .9em; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
