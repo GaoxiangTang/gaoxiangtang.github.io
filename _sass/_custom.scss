@@ -14,11 +14,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", 
 .page__content .work-title a:hover { text-decoration: underline; }
 .page__content .work-authors { margin-bottom: .2em; }
 .page__content .work-venue { color: #667085; font-size: .9em; margin-bottom: .25em; }
-.page__content .work-links { font-size: .85em; margin-bottom: 0; }
-.page__content .work-links a { text-decoration: none; }
-.page__content .work-links a:hover { text-decoration: underline; }
 .work-authors sup { color: #224b8d; margin-left: .08em; }
 .profile_box { display: block; }
+.author__avatar { display: block; width: 100%; max-width: 180px; margin: 0 0 1em; }
+.author__avatar img { display: block; width: 100%; max-width: none; min-width: 0; height: auto; padding: 0; border: 0; border-radius: 8px; }
 .author__content { padding-left: 0; display: block; }
 .author__name-zh { display: block; font-size: .78em; font-weight: 400; margin-top: .4em; }
 .sidebar .author__bio, .sidebar .author__research { font-size: .9em; line-height: 1.6; margin: .8em 0; }
@@ -34,6 +33,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", 
 @media (max-width: 924px) {
   #main { margin-top: 1.4em; }
   .sidebar { padding-bottom: 1em; border-bottom: 1px solid #edf0f3; margin-bottom: 1.5em; }
+  .profile_box { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 1em; align-items: start; }
+  .author__avatar { grid-column: 1; grid-row: 1; margin: 0; }
+  .author__content { grid-column: 2; min-width: 0; }
+  .author__urls-wrapper { grid-column: 1 / -1; }
+  .author__urls { margin-top: 0; }
   .author__name-zh { display: inline; margin-left: .4em; }
   .sidebar .author__research { display: none; }
   .author__urls { display: flex; flex-wrap: wrap; column-gap: 1em; row-gap: .3em; font-size: .9em; }
