@@ -1,0 +1,13 @@
+{% if page.lang == 'zh' %}
+  {% assign target_lang = 'en' %}
+  {% assign switch_label = '切换到英文' %}
+{% else %}
+  {% assign target_lang = 'zh' %}
+  {% assign switch_label = 'Switch to Chinese' %}
+{% endif %}
+{% assign target_url = site.data.i18n[target_lang].home_url %}
+{% if page.translation_key %}
+  {% assign translations = site.pages | concat: site.posts | where: 'translation_key', page.translation_key | where: 'lang', target_lang %}
+  {% if translations.size > 0 %}{% assign target_url = translations.first.url %}{% endif %}
+{% endif %}
+<a class="language-switch" href="{{ target_url | relative_url }}" hreflang="{{ site.data.i18n[target_lang].html_lang }}" aria-label="{{ switch_label }}"><span lang="zh-Hans"{% if page.lang == 'zh' %} class="is-current"{% endif %}>中文</span><span aria-hidden="true"> / </span><span lang="en"{% if page.lang != 'zh' %} class="is-current"{% endif %}>English</span></a>

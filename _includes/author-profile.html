@@ -1,15 +1,16 @@
+{% assign locale = site.data.i18n[page.lang] %}
 <div itemscope itemtype="https://schema.org/Person" class="profile_box">
   {% if site.author.avatar %}
-  <div class="author__avatar"><img src="{{ site.author.avatar | relative_url }}" alt="{{ site.author.name | escape }}"></div>
+  <div class="author__avatar"><img src="{{ site.author.avatar | relative_url }}" alt="{{ locale.name | escape }}"></div>
   {% endif %}
   <div class="author__content">
-    <h3 class="author__name" itemprop="name">Gaoxiang Tang <span class="author__name-zh" lang="zh-Hans">唐高翔</span></h3>
-    <p class="author__bio">{{ site.author.bio | escape }}</p>
-    <p class="author__research">Quantum error correction<br>Trapped-ion quantum computing</p>
+    <h3 class="author__name" itemprop="name">{{ locale.name }}</h3>
+    <p class="author__bio">{{ locale.bio | escape }}</p>
+    <p class="author__research">{{ locale.research_qec }}<br>{{ locale.research_ions }}</p>
   </div>
   <div class="author__urls-wrapper">
     <ul class="author__urls social-icons">
-      <li><a href="mailto:{{ site.author.email }}" title="{{ site.author.email | escape }}" aria-label="Email Gaoxiang Tang"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i></a></li>
+      <li><a href="mailto:{{ site.author.email }}" title="{{ site.author.email | escape }}" aria-label="{{ site.author.email | escape }}"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i></a></li>
       <li><a href="{{ site.author.googlescholar }}" title="Google Scholar" aria-label="Google Scholar"><i class="ai ai-google-scholar ai-fw" aria-hidden="true"></i></a></li>
       <li><a href="https://github.com/{{ site.author.github }}" title="GitHub" aria-label="GitHub"><i class="fab fa-fw fa-github" aria-hidden="true"></i></a></li>
     </ul>

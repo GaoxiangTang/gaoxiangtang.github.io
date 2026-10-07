@@ -1,0 +1,6 @@
+{% if page.translation_key %}
+  {% assign translations = site.pages | concat: site.posts | where: 'translation_key', page.translation_key %}
+  {% for translation in translations %}
+<link rel="alternate" hreflang="{{ site.data.i18n[translation.lang].html_lang }}" href="{{ translation.url | absolute_url }}">
+  {% endfor %}
+{% endif %}

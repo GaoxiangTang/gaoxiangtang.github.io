@@ -1,3 +1,4 @@
+{% assign locale = site.data.i18n[page.lang] %}
 <div class="post-feedback">
-  <p>如果你有问题或者认为 blog 有错，请联系 <a href="mailto:{{ site.author.email | escape }}">{{ site.author.email | escape }}</a>。</p>
+  <p>{{ locale.feedback_intro }} <a href="mailto:{{ site.author.email | escape }}">{{ site.author.email | escape }}</a>{{ locale.feedback_end }}</p>
 </div>

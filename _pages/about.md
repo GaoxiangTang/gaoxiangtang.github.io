@@ -1,6 +1,8 @@
 ---
 permalink: /
 title: ""
+lang: en
+translation_key: home
 excerpt: "Gaoxiang Tang, Ph.D. student at IIIS, Tsinghua University. Research in quantum error correction and trapped-ion quantum computing."
 author_profile: true
 redirect_from:
@@ -10,9 +12,9 @@ redirect_from:
 
 <h1 id="about-me">About Me</h1>
 
-I am **Gaoxiang Tang (唐高翔)**, a Ph.D. student at the Institute for Interdisciplinary Information Sciences (IIIS), Tsinghua University. I joined the Ph.D. program in 2024 and am advised by **Yukai Wu (吴宇恺)** and **Luming Duan (段路明)**. My research focuses on **quantum error correction** and **trapped-ion quantum computing**.
+I am **Gaoxiang Tang**, a Ph.D. student at the Institute for Interdisciplinary Information Sciences (IIIS), Tsinghua University. I joined the Ph.D. program in 2024 and am advised by **Yukai Wu** and **Luming Duan**. My research focuses on **quantum error correction** and **trapped-ion quantum computing**.
 
-Previously, I completed my undergraduate studies in the Department of Physics at Renmin University of China, where I was advised by **Xiang Zhang (张翔)**.
+Previously, I completed my undergraduate studies in the Department of Physics at Renmin University of China, where I was advised by **Xiang Zhang**.
 
 <h1 id="blogs">Blogs</h1>
 

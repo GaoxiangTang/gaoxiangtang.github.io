@@ -1,13 +1,14 @@
 ---
 layout: default
 ---
+{% assign locale = site.data.i18n[page.lang] %}
 <header class="post-header">
   <h1>{{ page.title | escape }}</h1>
-  <p><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+  <p><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: locale.post_date_format }}</time></p>
 </header>
 <div class="post-body">
   {{ content }}
 </div>
 {% include post-citation.html %}
 {% include post-feedback.html %}
-<p class="post-back"><a href="{{ '/#blogs' | relative_url }}">← Back to Blogs</a></p>
+<p class="post-back"><a href="{{ locale.home_url | append: '#blogs' | relative_url }}">← {{ locale.back_to_blogs }}</a></p>

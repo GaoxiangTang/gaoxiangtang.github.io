@@ -24,7 +24,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 
 # Site Author
 author:
-  name             : "Gaoxiang Tang / 唐高翔"
+  name             : "Gaoxiang Tang"
   avatar           : "images/portrait.jpg"
   bio              : "Ph.D. student · IIIS, Tsinghua University"
   location         : "Beijing, China"
@@ -129,6 +129,7 @@ defaults:
     values:
       layout: default
       author_profile: true
+      lang: en
 
 
   # Blog posts
@@ -138,6 +139,7 @@ defaults:
     values:
       layout: post
       author_profile: true
+      lang: en
 
 # Sass/SCSS
 sass:
@@ -146,7 +148,7 @@ sass:
 
 
 # Outputting
-permalink: /blog/:year/:month/:day/:title/
+permalink: /blog/:year/:title/
 timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 

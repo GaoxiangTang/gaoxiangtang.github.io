@@ -2,9 +2,10 @@
 {% assign citation_surname = citation_author | split: ' ' | last | slugify %}
 {% assign citation_year = page.date | date: '%Y' %}
 {% assign citation_key = citation_surname | append: citation_year | append: '-' | append: page.slug %}
+{% assign locale = site.data.i18n[page.lang] %}
 <section class="post-citation" aria-labelledby="citation">
-  <h2 id="citation">Citation</h2>
-  <p>If you find this article useful, please cite it as:</p>
+  <h2 id="citation">{{ locale.citation_heading }}</h2>
+  <p>{{ locale.citation_intro }}</p>
   <p class="post-citation__label"><strong>BibTeX:</strong></p>
   <pre class="post-citation__bibtex"><code><span class="bibtex-entry">@article</span>{<span class="bibtex-value">{{ citation_key | escape }}</span>,
   <span class="bibtex-field">title</span>={<span class="bibtex-value">{{ page.title | escape }}</span>},
