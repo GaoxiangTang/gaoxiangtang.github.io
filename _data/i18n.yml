@@ -32,8 +32,8 @@ zh:
   about_me: 关于我
   blogs: 博客
   selected_works: 代表作
-  author_note: "<sup>*</sup> 共同贡献 · <sup>†</sup> 通讯作者"
-  equal_contribution: 共同贡献
+  author_note: "<sup>*</sup> 共同一作 · <sup>†</sup> 通讯作者"
+  equal_contribution: 共同一作
   corresponding_author: 通讯作者
   post_date_format: "%Y年%m月%d日"
   work_date_format: "%Y年%m月"
