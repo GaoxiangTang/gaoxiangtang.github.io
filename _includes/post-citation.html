@@ -1,0 +1,16 @@
+{% assign citation_author = page.author | default: site.author.name | split: ' / ' | first %}
+{% assign citation_surname = citation_author | split: ' ' | last | slugify %}
+{% assign citation_year = page.date | date: '%Y' %}
+{% assign citation_key = citation_surname | append: citation_year | append: '-' | append: page.slug %}
+<section class="post-citation" aria-labelledby="citation">
+  <h2 id="citation">Citation</h2>
+  <p>If you find this article useful, please cite it as:</p>
+  <p class="post-citation__label"><strong>BibTeX:</strong></p>
+  <pre class="post-citation__bibtex"><code><span class="bibtex-entry">@article</span>{<span class="bibtex-value">{{ citation_key | escape }}</span>,
+  <span class="bibtex-field">title</span>={<span class="bibtex-value">{{ page.title | escape }}</span>},
+  <span class="bibtex-field">author</span>={<span class="bibtex-value">{{ citation_author | escape }}</span>},
+  <span class="bibtex-field">year</span>={<span class="bibtex-value">{{ citation_year }}</span>},
+  <span class="bibtex-field">month</span>={<span class="bibtex-value">{{ page.date | date: '%B' }}</span>},
+  <span class="bibtex-field">url</span>={<span class="bibtex-value">{{ page.url | absolute_url | escape }}</span>}
+}</code></pre>
+</section>

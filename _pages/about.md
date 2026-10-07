@@ -14,12 +14,12 @@ I am **Gaoxiang Tang (唐高翔)**, a Ph.D. student at the Institute for Interdi
 
 Previously, I completed my undergraduate studies in the Department of Physics at Renmin University of China, where I was advised by **Xiang Zhang (张翔)**.
 
+<h1 id="blogs">Blogs</h1>
+
+{% include blog-list.html %}
+
 <h1 id="selected-works">Selected Works</h1>
 
 <p class="author-note"><sup>*</sup> Equal contribution · <sup>†</sup> Corresponding author</p>
 
 {% include selected-works.html %}
-
-<h1 id="blogs">Blogs</h1>
-
-{% include blog-list.html %}

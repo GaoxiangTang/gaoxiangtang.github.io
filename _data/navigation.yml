@@ -1,7 +1,7 @@
 main:
   - title: "About Me"
     url: "/#about-me"
-  - title: "Selected Works"
-    url: "/#selected-works"
   - title: "Blogs"
     url: "/#blogs"
+  - title: "Selected Works"
+    url: "/#selected-works"
