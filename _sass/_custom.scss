@@ -34,7 +34,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", 
 .post-header, .post-body, .post-citation, .post-feedback { font-size: 18px; }
 .post-header p { color: #667085; }
 .post-body { min-width: 0; }
-.post-body .MathJax_Display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .35em 0; }
+.post-body .MathJax_Display, .post-body .MJXc-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .35em 0; }
 .post-citation { margin-top: 2.5em; padding-top: 1.5em; border-top: 1px solid #e6e8eb; }
 .post-citation h2 { font-size: 2em; font-weight: 400; margin: 0 0 .5em; }
 .page__content .post-citation__label { margin-top: 1.4em; margin-bottom: 1em; }
