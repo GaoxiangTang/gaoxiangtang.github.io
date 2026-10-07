@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Gaoxiang Tang"
-description              : "Ph.D. student at IIIS, Tsinghua University. Quantum error correction and trapped-ion quantum computing."
+description              : "Ph.D. student at Tsinghua University. Quantum error correction and trapped-ion quantum computing."
 repository               : "GaoxiangTang/gaoxiangtang.github.io"
 url                      : "https://gaoxiangtang.github.io"
 baseurl                  : ""
@@ -26,7 +26,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Gaoxiang Tang"
   avatar           : "images/portrait.jpg"
-  bio              : "Ph.D. student · IIIS, Tsinghua University"
+  bio              : "Ph.D. student · Tsinghua University"
   location         : "Beijing, China"
   employer         :
   pubmed           : 

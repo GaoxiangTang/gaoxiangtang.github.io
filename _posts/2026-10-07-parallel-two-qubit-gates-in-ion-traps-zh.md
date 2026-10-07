@@ -1,5 +1,5 @@
 ---
-title: "Parallel two-qubit gates in ion traps and their application to QEC"
+title: "离子阱中的并行两比特门及其在量子纠错中的应用"
 date: 2026-10-07 00:00:00 +0800
 layout: post
 lang: zh
@@ -78,7 +78,7 @@ $$
 
 上图展示了最高并行度的 schedule：有连边的离子正在执行两比特门。在最高并行度下，单对门所需的 Rabi 频率 $$\Omega_k/(2\pi)$$ 仍为 $$5\,\mathrm{MHz}$$ 量级。
 
-## Outlook
+## 展望
 
 要在大规模二维离子晶格上实现 QEC，我们还需要解决两个问题：
 

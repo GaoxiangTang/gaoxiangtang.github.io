@@ -3,13 +3,13 @@ permalink: /zh/
 title: ""
 lang: zh
 translation_key: home
-excerpt: "唐高翔，清华大学交叉信息研究院（IIIS）博士生，研究方向为 quantum error correction 和 trapped-ion quantum computing。"
+excerpt: "唐高翔，清华大学交叉信息研究院博士生，研究方向为量子纠错和离子阱量子计算。"
 author_profile: true
 ---
 
 <h1 id="about-me">关于我</h1>
 
-我是**唐高翔**，清华大学交叉信息研究院（IIIS）博士生。我于 2024 年开始博士研究，导师是**吴宇恺**和**段路明**。我的研究方向为 **quantum error correction** 和 **trapped-ion quantum computing**。
+我是**唐高翔**，清华大学交叉信息研究院博士生。我于 2024 年开始博士研究，导师是**吴宇恺**和**段路明**。我的研究方向为**量子纠错**和**离子阱量子计算**。
 
 此前，我在中国人民大学物理学系完成本科学业，导师是**张翔**。
 

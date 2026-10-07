@@ -1,9 +1,9 @@
 html { scroll-behavior: smooth; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Arial, sans-serif; }
-.masthead__inner-wrap { display: flex; align-items: center; gap: 1em; }
+.masthead__inner-wrap { display: flex; align-items: center; gap: 1em; padding-right: 140px; }
 .masthead__menu { flex: 1; min-width: 0; }
 .masthead__menu .greedy-nav { min-width: 0; }
-.language-switch { flex-shrink: 0; padding: .45em .7em; border: 1px solid #d7dee8; border-radius: 6px; color: #667085; font-size: 14px; white-space: nowrap; }
+.language-switch { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); padding: .45em .7em; border: 1px solid #d7dee8; border-radius: 6px; color: #667085; font-size: 14px; white-space: nowrap; }
 .language-switch:hover { border-color: #224b8d; }
 .language-switch:focus-visible { outline: 2px solid #224b8d; outline-offset: 2px; }
 .language-switch .is-current { color: #224b8d; font-weight: 600; }
