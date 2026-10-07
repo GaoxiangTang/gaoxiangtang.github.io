@@ -39,6 +39,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", 
 .blog-list time { color: #667085; font-size: .9em; margin-right: 1em; }
 .post-header p { color: #667085; }
 .post-body { min-width: 0; }
+.post-body p > img:only-child { display: block; margin-top: 2em; }
 .post-body .MathJax_Display, .post-body .MJXc-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .35em 0; }
 .post-citation { margin-top: 2.5em; padding-top: 1.5em; border-top: 1px solid #e6e8eb; }
 .post-citation h2 { margin: 0 0 .5em; }
