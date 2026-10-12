@@ -4,6 +4,7 @@ date: 2026-10-07 00:00:00 +0800
 layout: post
 lang: en
 translation_key: parallel-two-qubit-gates-in-ion-traps
+tags: ["trapped ion quantum computation", "quantum error correction"]
 ---
 
 This blog introduces our paper [tang2026](https://arxiv.org/abs/2609.04081), which addresses three main questions:

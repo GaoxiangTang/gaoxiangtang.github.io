@@ -4,6 +4,7 @@ date: 2026-10-12 00:00:00 +0800
 layout: post
 lang: zh
 translation_key: beyond-quadratic-loss-adam
+tags: ["physics of ai"]
 slug: beyond-quadratic-loss-adam
 permalink: /zh/blog/2026/beyond-quadratic-loss-adam/
 ---

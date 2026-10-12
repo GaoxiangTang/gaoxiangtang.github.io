@@ -4,6 +4,7 @@ date: 2026-10-07 00:00:00 +0800
 layout: post
 lang: zh
 translation_key: parallel-two-qubit-gates-in-ion-traps
+tags: ["trapped ion quantum computation", "quantum error correction"]
 slug: parallel-two-qubit-gates-in-ion-traps
 permalink: /zh/blog/2026/parallel-two-qubit-gates-in-ion-traps/
 ---

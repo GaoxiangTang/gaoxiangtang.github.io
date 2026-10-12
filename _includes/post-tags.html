@@ -1,0 +1,8 @@
+{% if include.tags and include.tags.size > 0 %}
+{% assign tag_locale = site.data.i18n[page.lang] %}
+<ul class="post-tags" aria-label="{{ tag_locale.tags_label | escape }}">
+  {% for tag in include.tags %}
+  <li>{{ tag | escape }}</li>
+  {% endfor %}
+</ul>
+{% endif %}

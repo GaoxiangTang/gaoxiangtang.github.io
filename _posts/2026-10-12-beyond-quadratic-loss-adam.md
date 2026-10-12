@@ -4,6 +4,7 @@ date: 2026-10-12 00:00:00 +0800
 layout: post
 lang: en
 translation_key: beyond-quadratic-loss-adam
+tags: ["physics of ai"]
 ---
 
 This blog introduces our paper [Beyond Quadratic Loss: The Stability Phase Diagram of Adam](https://arxiv.org/abs/2609.18314), which addresses three main questions:
