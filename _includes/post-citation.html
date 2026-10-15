@@ -12,11 +12,12 @@
   <h2 id="citation">{{ locale.citation_heading }}</h2>
   <p>{{ locale.citation_intro }}</p>
   <p class="post-citation__label"><strong>BibTeX:</strong></p>
-  <pre class="post-citation__bibtex"><code><span class="bibtex-entry">@article</span>{<span class="bibtex-value">{{ citation_key | escape }}</span>,
+  <pre class="post-citation__bibtex"><code><span class="bibtex-entry">@misc</span>{<span class="bibtex-value">{{ citation_key | escape }}</span>,
   <span class="bibtex-field">title</span>={<span class="bibtex-value">{{ citation_page.title | escape }}</span>},
   <span class="bibtex-field">author</span>={<span class="bibtex-value">{{ citation_author | escape }}</span>},
   <span class="bibtex-field">year</span>={<span class="bibtex-value">{{ citation_year }}</span>},
   <span class="bibtex-field">month</span>={<span class="bibtex-value">{{ citation_page.date | date: '%B' }}</span>},
+  <span class="bibtex-field">howpublished</span>={<span class="bibtex-value">Blog post</span>},
   <span class="bibtex-field">url</span>={<span class="bibtex-value">{{ citation_page.url | absolute_url | escape }}</span>}
 }</code></pre>
 </section>

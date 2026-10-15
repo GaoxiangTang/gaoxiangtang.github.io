@@ -13,7 +13,7 @@ This blog introduces our paper [Beyond Quadratic Loss: The Stability Phase Diagr
 2. What do the boundaries between these phases tell us about the loss landscape?
 3. Why does this loss landscape arise naturally in confident cross-entropy (CE) training?
 
-![Adam loss spikes, the phase diagram across beta settings, and the core–wall landscape](/images/blog/beyond-quadratic-loss-adam/overview.png)
+{% include post-figure.html src="/images/blog/beyond-quadratic-loss-adam/overview.png" alt="Adam loss spikes, the phase diagram across beta settings, and the core–wall landscape" caption="**Figure 1 · Adam loss spikes, phase diagram, and core–wall landscape**" %}
 
 The figure above gives the full picture of this work. (a) A Transformer trained on modular division exhibits recurring loss spikes. Orange diamonds mark the low-loss points before spikes. (b) Across $$(\beta_1,\beta_2)$$ settings, a clear phase boundary separates spiky from smooth training, with color indicating the oscillation period. (c) The pre-spike loss landscape has a narrow core and a steep wall. The green dashed line marks the typical update scale.
 
@@ -27,7 +27,7 @@ $$
 1-\beta_2\simeq C(1-\beta_1).
 $$
 
-![Phase diagrams across beta settings for six model–task settings](/images/blog/beyond-quadratic-loss-adam/final_boundary_scans_2x3.png)
+{% include post-figure.html src="/images/blog/beyond-quadratic-loss-adam/final_boundary_scans_2x3.png" alt="Phase diagrams across beta settings for six model–task settings" caption="**Figure 2 · Adam phase diagrams across six model–task settings**" %}
 
 Red points mark the phase boundary, and white dashed curves show power-law fits. At fixed $$\beta_1$$, larger $$\beta_2$$ lies on the spiky side, and the oscillation period grows as $$\beta_2$$ approaches 1. This shared pattern across different models identifies the relative memory timescales as a key to understanding Adam spikes.
 
@@ -42,7 +42,7 @@ L(x)\propto |x|^n,\quad n>2 &: \quad 1-\beta_2\propto(1-\beta_1).
 \end{aligned}
 $$
 
-![Phase diagrams for quadratic and superquadratic losses, and boundary coefficients as a function of the loss exponent](/images/blog/beyond-quadratic-loss-adam/toy_boundary_comparison.png)
+{% include post-figure.html src="/images/blog/beyond-quadratic-loss-adam/toy_boundary_comparison.png" alt="Phase diagrams for quadratic and superquadratic losses, and boundary coefficients as a function of the loss exponent" caption="**Figure 3 · Phase boundaries for quadratic and superquadratic losses**" %}
 
 Panels (a) and (b) correspond to $$n=2$$ and $$n=5$$, respectively, while (c) shows how the boundary coefficients vary with $$n$$. The near-linear phase boundary in real models points to a **non-quadratic loss landscape** at the scale of an Adam update.
 
@@ -69,7 +69,7 @@ $$
 
 Here, $$N$$ is the number of samples, and $$a_{ij}$$ describes how the margin changes along this direction. Large positive margins suppress the loss through $$e^{-m_{ij}}$$, while displacement amplifies some contributions through $$e^{a_{ij}s}$$, causing the loss to rise rapidly. **The flat core and steep wall arise naturally from the exponential structure of confident CE.**
 
-![Core–wall landscapes in a real model and a synthetic confident CE example](/images/blog/beyond-quadratic-loss-adam/core-wall-rollover.png)
+{% include post-figure.html src="/images/blog/beyond-quadratic-loss-adam/core-wall-rollover.png" alt="Core–wall landscapes in a real model and a synthetic confident CE example" caption="**Figure 4 · Core–wall landscapes in a real model and confident CE**" %}
 
 The left panel shows a real-model loss slice before a spike, and the right panel is constructed directly from synthetic confident CE. Both exhibit a core, a wall, and a rollover. Under a Gaussian approximation to the CE-weighted distribution of directional margin slopes, its width $$\sigma_a$$ sets the quadratic-core scale: $$s_{\rm core}\sim1/\sigma_a$$. Beyond the core, rapidly growing exponential terms produce a superquadratic wall. At larger displacements, the logarithm in exact CE slows the growth, producing the rollover.
 

@@ -42,6 +42,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", 
 .post-header p { color: #667085; }
 .post-body { min-width: 0; }
 .post-body p > img:only-child { display: block; margin-top: 2em; }
+.post-body .post-figure { display: block; width: 100%; margin: 2em 0 1.6em; }
+.post-body .post-figure > img { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto; }
+.post-body .post-figure figcaption { margin-top: .65em; color: #667085; font-size: .85em; line-height: 1.6; text-align: center; }
+.post-body .post-figure figcaption p { margin: 0; font-size: inherit; }
+.post-body .post-figure figcaption strong { display: block; color: #475467; font-weight: 600; }
+.post-body blockquote { margin: 1.5em 0; padding: 1em 1.2em; border-left: 3px solid #224b8d; border-radius: 0 6px 6px 0; background: #f3f6fb; font-style: normal; }
+.post-body blockquote > p:last-child { margin-bottom: 0; }
 .post-body .MathJax_Display, .post-body .MJXc-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .35em 0; }
 .post-citation { margin-top: 2.5em; padding-top: 1.5em; border-top: 1px solid #e6e8eb; }
 .post-citation h2 { margin: 0 0 .5em; }

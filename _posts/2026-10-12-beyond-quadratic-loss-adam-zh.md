@@ -15,7 +15,7 @@ permalink: /zh/blog/2026/beyond-quadratic-loss-adam/
 2. 这些 phase 的分界告诉了我们怎样的 loss landscape？
 3. 这种 loss landscape 为什么会自然出现在 confident cross-entropy（CE）训练中？
 
-![Adam 训练中的 loss spikes、beta settings 上的 phase diagram 与 core–wall landscape](/images/blog/beyond-quadratic-loss-adam/overview.png)
+{% include post-figure.html src="/images/blog/beyond-quadratic-loss-adam/overview.png" alt="Adam 训练中的 loss spikes、beta settings 上的 phase diagram 与 core–wall landscape" caption="**图 1 · Adam loss spikes、phase diagram 与 core–wall landscape**" %}
 
 上图给出这项工作的完整图景：(a) modular-division Transformer 的训练 loss 周期性出现 spikes，橙色菱形标记 spike 前的低 loss 点。(b) 在 $$(\beta_1,\beta_2)$$ settings 上，spiky 与平稳训练之间存在清晰的 phase boundary，颜色表示振荡周期。(c) Spike 前的 loss landscape 呈现狭窄的 core 与陡峭的 wall，绿色虚线标记典型更新尺度。
 
@@ -29,7 +29,7 @@ $$
 1-\beta_2\simeq C(1-\beta_1).
 $$
 
-![六组模型与任务在 beta settings 上的 phase diagram](/images/blog/beyond-quadratic-loss-adam/final_boundary_scans_2x3.png)
+{% include post-figure.html src="/images/blog/beyond-quadratic-loss-adam/final_boundary_scans_2x3.png" alt="六组模型与任务在 beta settings 上的 phase diagram" caption="**图 2 · 六组模型的 Adam phase diagram**" %}
 
 红点标记 phase boundary，白色虚线为幂律拟合。固定 $$\beta_1$$ 时，较大的 $$\beta_2$$ 对应 spiky 一侧，振荡周期也随 $$\beta_2$$ 接近 1 而增长。不同模型共同呈现这一规律，说明两种记忆时间的相对比例是理解 Adam spikes 的关键。
 
@@ -44,7 +44,7 @@ L(x)\propto |x|^n,\quad n>2 &: \quad 1-\beta_2\propto(1-\beta_1).
 \end{aligned}
 $$
 
-![Quadratic 与 superquadratic loss 的 phase diagram，以及分界系数随 loss exponent 的变化](/images/blog/beyond-quadratic-loss-adam/toy_boundary_comparison.png)
+{% include post-figure.html src="/images/blog/beyond-quadratic-loss-adam/toy_boundary_comparison.png" alt="Quadratic 与 superquadratic loss 的 phase diagram，以及分界系数随 loss exponent 的变化" caption="**图 3 · Quadratic 与 superquadratic loss 的 phase boundary**" %}
 
 上图 (a)、(b) 分别对应 $$n=2$$ 与 $$n=5$$，(c) 展示分界系数随 $$n$$ 的变化。真实模型中的近线性 phase boundary，指向 Adam 更新尺度上的 **non-quadratic loss landscape**。
 
@@ -71,7 +71,7 @@ $$
 
 这里 $$N$$ 是样本数，$$a_{ij}$$ 描述 margin 沿该方向的变化。大的正 margin 通过 $$e^{-m_{ij}}$$ 压低 loss，位移则通过 $$e^{a_{ij}s}$$ 放大部分贡献，使 loss 迅速上升。**平坦的 core 与陡峭的 wall 自然起源于 confident CE 的指数结构。**
 
-![真实模型与 synthetic confident CE 的 core–wall landscape 对照](/images/blog/beyond-quadratic-loss-adam/core-wall-rollover.png)
+{% include post-figure.html src="/images/blog/beyond-quadratic-loss-adam/core-wall-rollover.png" alt="真实模型与 synthetic confident CE 的 core–wall landscape 对照" caption="**图 4 · 真实模型与 confident CE 的 core–wall landscape**" %}
 
 左图是真实模型 spike 前的 loss slice，右图由 synthetic confident CE 直接构造，两者都呈现 core、wall 和 rollover。在 CE-weighted directional margin slopes 的 Gaussian approximation 下，分布宽度 $$\sigma_a$$ 决定 quadratic core 的尺度：$$s_{\rm core}\sim1/\sigma_a$$。离开 core 后，指数项快速增长，产生 superquadratic wall。更远处，exact CE 中的 logarithm 使增长放缓，形成 rollover。
 

@@ -37,7 +37,7 @@ We first introduce two approaches to two-qubit gates. The first is conventional 
 
 The second is AESE (adiabatic elimination of spin-motion entanglement): set $$\Omega(t)=\Omega_0\gamma(t)$$, where $$\gamma(t)$$ is an envelope that turns on and off smoothly at the beginning and end of the gate. One example is $$\gamma(t)=\sin^2(\pi t/T)$$, where $$T$$ is the gate time. When all relevant motional modes satisfy adiabatic conditions such as $$\vert \mu-\omega_m\vert T\gg1$$, the residual displacements $$\alpha_{\ell m}$$ are suppressed. See [sutherland2024](https://arxiv.org/abs/2308.05865) and [hughes2025](https://arxiv.org/html/2510.17286v1#S2.SS2) for the specific requirements. We then only need to adjust $$\Omega_0$$ to achieve $$\Theta_{ij}=\pi/4$$, without optimizing each time segment of the waveform. This approach is more robust to multiple types of error. In Duan's group at Tsinghua University, we consider AESE the best approach to implementing two-qubit gates in ion traps.
 
-![Comparison of a segmented AM waveform and a smooth AESE envelope](/images/blog/parallel-two-qubit-gates/waveform_comparison.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/waveform_comparison.png" alt="Comparison of a segmented AM waveform and a smooth AESE envelope" caption="**Figure 1 · AM waveform and AESE envelope**" %}
 
 Parallel AESE gates can be implemented by simultaneously driving two ion pairs at different frequencies $$\mu_A$$ and $$\mu_B$$. Let the two ion pairs be $$A=\{i_A,j_A\}$$ and $$B=\{i_B,j_B\}$$. Then
 
@@ -48,7 +48,7 @@ H(t)={}&\Omega_A(t)\sin(\mu_A t)\sum_{p\in A}\sum_m\eta_m b_{pm}X_p\left(a_m e^{
 \end{aligned}
 $$
 
-![Schematic of parallel gates driving two ion pairs at different frequencies](/images/blog/parallel-two-qubit-gates/frequency_multiplexed_gate.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/frequency_multiplexed_gate.png" alt="Schematic of parallel gates driving two ion pairs at different frequencies" caption="**Figure 2 · Parallel gates with frequency multiplexing**" %}
 
 Define the frequency difference between the two drives as $$\delta=\mu_A-\mu_B$$. The time evolution is
 
@@ -61,7 +61,7 @@ $$
 
 Here, the residual displacements $$\alpha_{\ell m}$$ can still be suppressed by AESE. $$\Theta_A$$ and $$\Theta_B$$ are the desired entangling angles for the two ion pairs, while $$\Theta_{pq}$$ between different ion pairs represents crosstalk. For envelopes satisfying the required smoothness and AESE conditions, the crosstalk phase decays as $$1/(\vert \delta\vert T)^3$$. For a $$\sin^2$$ envelope, the suppression improves to $$1/(\vert \delta\vert T)^5$$ over the frequency-difference range of interest.
 
-![Crosstalk entangling angle at general frequency settings and a reference line with slope −5](/images/blog/parallel-two-qubit-gates/crosstalk_vs_delta.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/crosstalk_vs_delta.png" alt="Crosstalk entangling angle at general frequency settings and a reference line with slope −5" caption="**Figure 3 · Crosstalk versus frequency separation**" %}
 
 The crosstalk suppression is also robust to noise. Compared with existing approaches such as EASE [grzesiak2020](https://doi.org/10.1038/s41467-020-16790-9), our method requires less laser power. See [tang2026](https://arxiv.org/abs/2609.04081) for more details.
 
@@ -69,11 +69,11 @@ The crosstalk suppression is also robust to noise. Compared with existing approa
 
 We performed numerical simulations of a two-dimensional crystal containing 512 ions, with crystal parameters based on [guo2024](https://arxiv.org/abs/2311.17163). With an appropriate ion–qubit mapping and schedule, we find that the logical error rate of BB248 decreases substantially as the degree of parallelism increases, reaching the $$10^{-12}$$ level under realistic noise parameters.
 
-![BB248 logical error rate per cycle versus laser power](/images/blog/parallel-two-qubit-gates/bb248_logical_error.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/bb248_logical_error.png" alt="BB248 logical error rate per cycle versus laser power" caption="**Figure 4 · BB248 logical error rate versus laser power**" %}
 
 Here, $$2\sum_k\Omega_k/(2\pi N)$$ is a proxy for laser power and also reflects the degree of parallelism.
 
-![Schedule visualization of 124 simultaneous two-qubit gates in a 512-ion crystal](/images/blog/parallel-two-qubit-gates/bb248_parallel_schedule.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/bb248_parallel_schedule.png" alt="Schedule visualization of 124 simultaneous two-qubit gates in a 512-ion crystal" caption="**Figure 5 · 124 parallel gates in a 512-ion crystal**" %}
 
 The figure above shows the schedule at the highest degree of parallelism. Connected ions are executing two-qubit gates. At this highest degree of parallelism, the Rabi frequency $$\Omega_k/(2\pi)$$ required for an individual gate remains on the order of $$5\,\mathrm{MHz}$$.
 

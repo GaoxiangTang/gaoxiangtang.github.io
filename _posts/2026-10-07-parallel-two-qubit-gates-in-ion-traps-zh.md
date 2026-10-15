@@ -39,7 +39,7 @@ $$
 
 第二种是 AESE（adiabatic elimination of spin-motion entanglement）：令 $$\Omega(t)=\Omega_0\gamma(t)$$，其中 $$\gamma(t)$$ 是在开始和结束时平滑开启、关闭的 envelope，例如 $$\gamma(t)=\sin^2(\pi t/T)$$，$$T$$ 为门时间。当所有相关振动模满足 $$\vert \mu-\omega_m\vert T\gg1$$ 等绝热条件时，残余位移 $$\alpha_{\ell m}$$ 会受到抑制，具体要求见 [sutherland2024](https://arxiv.org/abs/2308.05865) 和 [hughes2025](https://arxiv.org/html/2510.17286v1#S2.SS2)。这样，我们只需调节 $$\Omega_0$$，使 $$\Theta_{ij}=\pi/4$$，无需逐段优化波形。这种方案对多种误差更鲁棒。在清华大学段组，我们认为 AESE 是实现离子阱两比特门的最佳方案。
 
-![分段 AM 波形与 AESE 平滑 envelope 的对比](/images/blog/parallel-two-qubit-gates/waveform_comparison.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/waveform_comparison.png" alt="分段 AM 波形与 AESE 平滑 envelope 的对比" caption="**图 1 · AM 波形与 AESE envelope 对比**" %}
 
 并行 AESE 门可以通过同时驱动两个 ion pair、为它们设置不同的频率 $$\mu_A$$ 和 $$\mu_B$$ 来实现。记两个 ion pair 分别为 $$A=\{i_A,j_A\}$$ 和 $$B=\{i_B,j_B\}$$，则
 
@@ -50,7 +50,7 @@ H(t)={}&\Omega_A(t)\sin(\mu_A t)\sum_{p\in A}\sum_m\eta_m b_{pm}X_p\left(a_m e^{
 \end{aligned}
 $$
 
-![以不同频率驱动两个 ion pair 的并行门示意图](/images/blog/parallel-two-qubit-gates/frequency_multiplexed_gate.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/frequency_multiplexed_gate.png" alt="以不同频率驱动两个 ion pair 的并行门示意图" caption="**图 2 · Frequency multiplexing 并行门**" %}
 
 定义两组驱动的频率差为 $$\delta=\mu_A-\mu_B$$。其时间演化为
 
@@ -63,7 +63,7 @@ $$
 
 其中，残余位移 $$\alpha_{\ell m}$$ 仍可由 AESE 抑制，$$\Theta_A$$ 和 $$\Theta_B$$ 是两个 ion pair 各自需要的纠缠角，不同 ion pair 之间的 $$\Theta_{pq}$$ 则是 crosstalk。满足相应平滑性和 AESE 条件的 envelope 可使 crosstalk 相位随 $$1/(\vert \delta\vert T)^3$$ 衰减；对于 $$\sin^2$$ envelope，在我们关心的频率差范围内，可以进一步实现 $$1/(\vert \delta\vert T)^5$$ 的抑制。
 
-![一般频率设置下的 crosstalk 纠缠角及斜率 −5 的参考线](/images/blog/parallel-two-qubit-gates/crosstalk_vs_delta.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/crosstalk_vs_delta.png" alt="一般频率设置下的 crosstalk 纠缠角及斜率 −5 的参考线" caption="**图 3 · Crosstalk 随频率间隔的变化**" %}
 
 这种方案的 crosstalk 抑制同样对噪声鲁棒。相比已有方案，比如 EASE [grzesiak2020](https://doi.org/10.1038/s41467-020-16790-9)，我们的方法对激光功率的要求更低，更多细节见 [tang2026](https://arxiv.org/abs/2609.04081)。
 
@@ -71,11 +71,11 @@ $$
 
 我们在包含 512 个离子的二维晶体上进行了数值模拟，晶体参数参考 [guo2024](https://arxiv.org/abs/2311.17163)。通过合适的 ion–qubit mapping 和 schedule，我们发现，随着并行程度提高，BB248 的逻辑错误率显著下降，在现实噪声参数下可以达到 $$10^{-12}$$ 量级。
 
-![BB248 每个 cycle 的逻辑错误率随激光功率变化](/images/blog/parallel-two-qubit-gates/bb248_logical_error.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/bb248_logical_error.png" alt="BB248 每个 cycle 的逻辑错误率随激光功率变化" caption="**图 4 · BB248 的 logical error rate 与激光功率**" %}
 
 其中，$$2\sum_k\Omega_k/(2\pi N)$$ 是激光功率的 proxy，也反映了并行程度。
 
-![512 离子晶体中同时执行 124 个两比特门的 schedule 可视化](/images/blog/parallel-two-qubit-gates/bb248_parallel_schedule.png)
+{% include post-figure.html src="/images/blog/parallel-two-qubit-gates/bb248_parallel_schedule.png" alt="512 离子晶体中同时执行 124 个两比特门的 schedule 可视化" caption="**图 5 · 512 离子晶体中的 124 个并行门**" %}
 
 上图展示了最高并行度的 schedule：有连边的离子正在执行两比特门。在最高并行度下，单对门所需的 Rabi 频率 $$\Omega_k/(2\pi)$$ 仍为 $$5\,\mathrm{MHz}$$ 量级。
 

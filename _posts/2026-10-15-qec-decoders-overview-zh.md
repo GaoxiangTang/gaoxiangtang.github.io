@@ -15,7 +15,7 @@ permalink: /zh/blog/2026/qec-decoders-overview/
 
 先统一三个术语。**Mechanism** 是候选错误机制及其对应的二值变量，在文献中也称为 error、error mechanism 或 variable。$$x_i=1$$ 表示第 $$i$$ 个 mechanism 发生，$$x_i=0$$ 表示未发生。$$x$$ 是全部 mechanisms 的构型，$$p_i$$ 是第 $$i$$ 个 mechanism 的 prior probability。
 
-**Detector** 是用于检测错误的校验量。$$s_a=1$$ 表示第 $$a$$ 个 detector 被触发，$$s_a=0$$ 表示未触发，$$s$$ 是全部 detectors 的取值向量。下文将 detector event 或 detection event 统一称为“触发的 detector”。**Logical** 是所跟踪的逻辑可观测量，$$\ell_\alpha=1$$ 表示第 $$\alpha$$ 个 logical 发生翻转，$$\ell$$ 是全部 logical 的翻转向量。
+**Detector** 是用于检测错误的校验量。在重复 syndrome extraction 中，它通常是**同一 stabilizer 在相邻两轮的 syndrome 测量结果的模 2 差分**。若 $$m_{c,t}$$ 表示第 $$t$$ 轮对 stabilizer $$c$$ 的 syndrome 测量结果，则 $$s_{c,t}=m_{c,t}\oplus m_{c,t-1}$$。因此，detector 检测的是 syndrome 的变化。$$s_a=1$$ 表示第 $$a$$ 个 detector 被触发，$$s_a=0$$ 表示未触发，$$s$$ 是全部 detectors 的取值向量。下文将 detector event 或 detection event 统一称为“触发的 detector”。**Logical** 是所跟踪的逻辑可观测量，$$\ell_\alpha=1$$ 表示第 $$\alpha$$ 个 logical 发生翻转，$$\ell$$ 是全部 logical 的翻转向量。
 
 Mechanisms 对 detectors 和 logical 的影响分别由二元线性映射 $$H$$ 和 $$A$$ 描述。以下等式在 $$\mathbb F_2$$ 上成立：
 
@@ -23,11 +23,11 @@ $$
 Hx=s,\qquad \ell=Ax.
 $$
 
-以输出 mechanism 构型的 decoder 为例，它接收 $$p,s,H$$，寻找满足 $$H\hat x=s$$ 的构型 $$\hat x$$。满足 detector 约束只说明这个构型能解释观测。纠错成功还要求 $$A\hat x=\ell$$，也就是预测的 logical 翻转与真实翻转一致。本文用 $$d$$ 表示 code distance，用 $$s$$ 表示 detector 向量。
+以输出 mechanism 构型的 decoder 为例，它接收 $$p,s,H$$，寻找满足 $$H\hat x=s$$ 的构型 $$\hat x$$。满足 detector 约束只说明这个构型能解释观测。**纠错成功还要求 $$A\hat x=\ell$$**，也就是预测的 logical 翻转与真实翻转一致。本文用 $$d$$ 表示 code distance，用 $$s$$ 表示 detector 向量。
 
 $$H$$ 也定义了一个无向二部图，称为 Tanner graph：每一行对应一个 detector 节点，每一列对应一个 mechanism 节点，$$H_{ai}=1$$ 表示两者之间有一条边。对于 low-density parity-check（LDPC）code，这个图是稀疏的。许多高性能 quantum LDPC（qLDPC）code 的构造利用了 expander 的性质，其连接具有 nonlocal 特征，难以在二维平面上仅用局域连接实现。连接结构对 code 性能的限制可参考 [baspin2021](https://arxiv.org/abs/2106.00765)。
 
-![Mechanisms、detector 约束与 logical 翻转之间的关系](/images/blog/qec-decoders-overview/decoder_task.png)
+{% include post-figure.html src="/images/blog/qec-decoders-overview/decoder_task.png" alt="Mechanisms、detector 约束与 logical 翻转之间的关系" caption="**图 1 · Decoder 的输入与目标**" %}
 
 Noise model 决定我们使用什么 mechanisms。**Circuit-level noise** 对应线路中的具体错误机制，例如 idle dephasing 导致的 Pauli Z，或者两比特门中的单比特、两比特误差。**Phenomenological noise** 则只考虑 data mechanism 和 measurement mechanism，分别描述数据错误和测量错误，将多轮纠错中的误差归入这两类。
 
@@ -35,9 +35,9 @@ Noise model 决定我们使用什么 mechanisms。**Circuit-level noise** 对应
 
 ## 2. Conventional decoders
 
-这一节介绍 MWPM、BP 及其后处理方法，以及 Tesseract。其中，Tesseract 的 logical error rate 达到了 state of the art（SOTA）水平，但速度较慢。RelayBP 的速度相对较快，准确度则略逊一筹。
+这一节介绍 MWPM、BP 及其后处理方法，以及 Tesseract。其中，Tesseract 的 logical error rate 达到了 state of the art 水平，但速度较慢。RelayBP 的速度相对较快，准确度则略逊一筹。
 
-我认为，以 Tesseract 为参照，经典 decoder 在准确度上的提升空间已经比较有限。比较解码结果与真实构型的似然度会发现，在多数解码失败的样本中，解码结果的似然度反而更高，也就是说，即使找到了最似然构型，也无法纠正这类错误。因而，更多工作可以着眼于缩短解码时间。一种思路是将多个 decoder 分层组合：先使用较弱但快速的 decoder，对未能解码或结果可疑的样本，再调用更强但更慢的 decoder，并逐层升级。在低物理错误率下，多数 shots 中的错误都很 local，几轮 BP 就能处理，只有少数困难构型需要复杂的 decoder。Mitten codes 论文中的 telescoping decoder 就采用了这种思路 [bhardwaj2026](https://arxiv.org/abs/2607.28795)。
+> **个人看法。** 我认为，以 Tesseract 为参照，经典 decoder 在准确度上的提升空间已经比较有限。比较解码结果与真实构型的似然度会发现，在多数解码失败的样本中，解码结果的似然度反而更高，也就是说，即使找到了最似然构型，也无法纠正这类错误。因而，更多工作可以着眼于缩短解码时间。一种思路是将多个 decoder 分层组合：先使用较弱但快速的 decoder，对未能解码或结果可疑的样本，再调用更强但更慢的 decoder，并逐层升级。在低物理错误率下，多数 shots 中的错误都很 local，几轮 BP 就能处理，只有少数困难构型需要复杂的 decoder。Mitten codes 论文中的 telescoping decoder 就采用了这种思路 [bhardwaj2026](https://arxiv.org/abs/2607.28795)。
 
 ### Minimum weight perfect matching
 
@@ -60,6 +60,8 @@ Sparse Blossom 直接在稀疏 detector graph 上求解，省去了上述最短�
 Belief propagation（BP）在 $$H$$ 定义的 Tanner graph 上运行。输入的 prior $$p$$ 和 detector 观测 $$s$$ 分别位于 mechanism 和 detector 节点上。BP 在两类节点之间传递标量消息，将 $$s$$ 的信息纳入对各 mechanism 的估计，得到 posterior probability。相关介绍可参考 [liu2019](https://arxiv.org/abs/1811.07835v2)。
 
 下面用 $$i,j$$ 表示 mechanism 节点，$$a,b$$ 表示 detector 节点，$$N(\cdot)$$ 表示邻居集合，$$t$$ 表示迭代次数。
+
+{% include post-figure.html src="/images/blog/qec-decoders-overview/bp_scalar_functions.png" alt="BP check update 中的 tanh 与 atanh 函数" caption="**图 2 · BP 更新中的 tanh 与 atanh**" %}
 
 1. **初始化。** 由 prior probability 计算每个 mechanism 的 prior log-likelihood ratio（LLR），并初始化 mechanism → detector 消息：
 
@@ -89,8 +91,6 @@ Belief propagation（BP）在 $$H$$ 定义的 Tanner graph 上运行。输入的
    M_i^{(t)}=L_i+\sum_{a\in N(i)}r_{a\to i}^{(t)}.
    $$
 
-   ![BP check update 中的 tanh 与 atanh 函数](/images/blog/qec-decoders-overview/bp_scalar_functions.png)
-
    由 $$M_i$$ 得到 posterior probability 和硬判决：
 
    $$
@@ -101,28 +101,30 @@ Belief propagation（BP）在 $$H$$ 定义的 Tanner graph 上运行。输入的
 
 **RelayBP：改变迭代 dynamics。** IBM 提出的 RelayBP 是 BP 类算法中表现较好的一种。它通过带有不同 memory strengths 的多段迭代，缓解普通 BP 的振荡和 trapping sets 问题 [muller2025](https://arxiv.org/abs/2506.01779)。
 
+蓝色高亮标出相对于上面的 BP 更新发生变化的部分，包括 dynamic bias、MinSum 更新，以及用 $$\Lambda_i^{(t)}$$ 替代 $$L_i$$。
+
 1. **初始化。** 仍使用原始 prior，令 $$q_{i\to a}^{(0)}=M_i^{(0)}=L_i$$。
 
 2. **构造 dynamic bias。** 用上一轮的 posterior 调整当前轮的 bias：
 
    $$
-   \Lambda_i^{(t)}=(1-\gamma_i)L_i+\gamma_i M_i^{(t-1)}.
+   {\color{#0057ff}\boldsymbol{\Lambda_i^{(t)}=(1-\gamma_i)L_i+\gamma_i M_i^{(t-1)}}}.
    $$
 
 3. **更新 detector → mechanism 消息。** 使用 MinSum 更新：
 
    $$
-   r_{a\to i}^{(t)}=(-1)^{s_a}\prod_{j\in N(a)\setminus\{i\}}\operatorname{sgn}\!\left(q_{j\to a}^{(t-1)}\right)\min_{j\in N(a)\setminus\{i\}}\left|q_{j\to a}^{(t-1)}\right|.
+   r_{a\to i}^{(t)}={\color{#0057ff}\boldsymbol{(-1)^{s_a}\prod_{j\in N(a)\setminus\{i\}}\operatorname{sgn}\!\left(q_{j\to a}^{(t-1)}\right)\min_{j\in N(a)\setminus\{i\}}\left|q_{j\to a}^{(t-1)}\right|}}.
    $$
 
 4. **更新 mechanism → detector 消息和 posterior。** 用 dynamic bias 替代原始 prior LLR：
 
    $$
-   q_{i\to a}^{(t)}=\Lambda_i^{(t)}+\sum_{b\in N(i)\setminus\{a\}}r_{b\to i}^{(t)},
+   q_{i\to a}^{(t)}={\color{#0057ff}\boldsymbol{\Lambda_i^{(t)}}}+\sum_{b\in N(i)\setminus\{a\}}r_{b\to i}^{(t)},
    $$
 
    $$
-   M_i^{(t)}=\Lambda_i^{(t)}+\sum_{a\in N(i)}r_{a\to i}^{(t)}.
+   M_i^{(t)}={\color{#0057ff}\boldsymbol{\Lambda_i^{(t)}}}+\sum_{a\in N(i)}r_{a\to i}^{(t)}.
    $$
 
 5. **硬判决并检查 detector 约束。** 由 $$\hat x_i=\mathbf1[M_i<0]$$ 得到硬判决，再检查 $$H\hat x=s$$，满足约束时记录候选解。若当前 leg 仍需继续迭代，则令 $$t\leftarrow t+1$$ 并返回步骤 2。$$\gamma_i=0$$ 时，上述更新退化为 MinSum-BP。
@@ -153,9 +155,7 @@ $$
 
 LSD-0 在局部约束可解、所有触发的 detectors 都得到解释后停止。LSD-$$\mu$$ 则在合法 clusters 上继续做至多 $$\mu$$ 次额外增长，然后进行局部 OSD。与全局消元相比，局部 clusters 为并行求解提供了空间。
 
-![LSD clusters 的增长与合并](/images/blog/qec-decoders-overview/lsd_fig2.png)
-
-LSD cluster 生长示意，来自 [hillmann2025](https://arxiv.org/abs/2406.18655v2) 的 Fig. 2。
+{% include post-figure.html src="/images/blog/qec-decoders-overview/lsd_fig2.png" alt="LSD clusters 的增长与合并" caption="**图 3 · LSD cluster 的增长与合并** 来源：[hillmann2025](https://arxiv.org/abs/2406.18655v2)，Fig. 2。" %}
 
 在足够低的物理错误率下，典型 cluster 的大小不会随 code 规模增长，因此 $$\mu$$ 可以取到较大的值，甚至达到 20。在相关 bivariate bicycle（BB）code 测试中，LSD 通常比 OSD 更快，logical error rate 也更低。
 
@@ -171,7 +171,7 @@ $$
 
 可以将 BF-OSD 理解为一种似然度优先搜索，其形式类似 Dijkstra 最短路算法。搜索从空集合 $$T=\varnothing$$ 开始，用 priority queue 保存候选。每次取出已生成候选中评分最高的 $$T$$，检查是否改善当前最优解，然后生成 $$T'=T\cup\{j\}$$。规定 $$j>\max T$$，并令 $$\max\varnothing=0$$，可以避免重复生成同一组合。Query budget 耗尽后返回已找到的最佳构型。
 
-尽管搜索框架有所创新，BF-OSD 的表现并没有比 LSD 好很多。我认为，一个可能的原因是：Dijkstra 算法中的路径距离随扩展单调增加，而这里的似然度并不随生成元的加入单调变化。如果从初始猜测 $$x_0$$ 到最似然构型 $$x$$ 必须跨过一个 energy barrier，那么在有限的 query budget 内，搜索可能始终无法越过低评分的中间候选，使最优构型没有机会进入 priority queue。
+> **个人看法。** 尽管搜索框架有所创新，BF-OSD 的表现并没有比 LSD 好很多。我认为，一个可能的原因是：Dijkstra 算法中的路径距离随扩展单调增加，而这里的似然度并不随生成元的加入单调变化。如果从初始猜测 $$x_0$$ 到最似然构型 $$x$$ 必须跨过一个 energy barrier，那么在有限的 query budget 内，搜索可能始终无法越过低评分的中间候选，使最优构型没有机会进入 priority queue。
 
 ### Tesseract：A* 与 beam search
 
@@ -219,9 +219,7 @@ Transformer decoder 的基本组成是 embedding、attention 和 multilayer perc
 
 在 QEC 中，空间关系和跨 cycle 的历史需要共同处理。AlphaQubit 使用 recurrent Transformer：将当前 cycle 的 detector 信息 embedding 后加入 hidden state，再通过同一 cycle 内的空间 attention 更新表示，逐轮传递历史 [bausch2024](https://www.nature.com/articles/s41586-024-08148-8)。GraphQEC 则在时间方向使用 linear attention 处理历史信息 [hu2025](https://arxiv.org/abs/2502.19971)。
 
-![AlphaQubit 的 recurrent architecture](/images/blog/qec-decoders-overview/alphaqubit_fig2a_recurrent_architecture.png)
-
-AlphaQubit recurrent architecture，来自 [bausch2024](https://www.nature.com/articles/s41586-024-08148-8) 的 Fig. 2a。
+{% include post-figure.html src="/images/blog/qec-decoders-overview/alphaqubit_fig2a_recurrent_architecture.png" alt="AlphaQubit 的 recurrent architecture" caption="**图 4 · AlphaQubit 的 recurrent architecture** 来源：[bausch2024](https://www.nature.com/articles/s41586-024-08148-8)，Fig. 2a。" %}
 
 这些模型最终预测 logical 翻转。以 AlphaQubit 为例，readout 将 detector hidden states 映射到 data qubit representations，再进行与 logical observable 对应的 pooling 和输出。本文介绍的 Transformer 路线主要采用这种 logical readout，而构型型 decoder 输出的是 mechanism 层面的 $$\hat x$$。
 
@@ -231,15 +229,13 @@ AlphaQubit recurrent architecture，来自 [bausch2024](https://www.nature.com/a
 
 对具有规则局部几何的 surface code，可以使用 convolutional neural network（CNN）。对 nonlocal LDPC code，则使用由 Tanner graph 邻接关系决定邻居集合的 graph neural network（GNN）。
 
-首先，对每个 spacetime detector $$v=(c,t)$$，将其观测值 $$s_v$$ embedding 为 $$h_v^{(0)}\in\mathbb R^{D_h}$$。这里用 $$D_h$$ 表示 hidden dimension，以区分前面的 detector 映射矩阵 $$H$$。
+首先，对每个 spacetime detector $$v=(c,t)$$，将其观测值 $$s_v$$ embedding 为 $$h_v^{(0)}\in\mathbb R^{D_h}$$。这里用 $$D_h$$ 表示 hidden dimension。
 
 随后经过 $$L$$ 个 bottleneck residual blocks。每个 block 先将特征从 $$D_h$$ 维投影到 $$D_h/4$$ 维，在较低维空间中做 convolution，再投影回 $$D_h$$ 维，最后加入 residual connection。每次投影或 convolution 前使用 batch normalization（BN）和 sigmoid linear unit（SiLU）activation。
 
 BN 在训练时根据 batch 等统计维度归一化各 feature channel 的 activation，并带有可学习的缩放和偏置。Residual connection 将输入加回当前 block 的输出，使网络能够学习对已有表示的修正。
 
-![Cascade 的 embedding、bottleneck blocks 和 logical readout](/images/blog/qec-decoders-overview/cascade_fig1a_architecture.png)
-
-Cascade architecture，来自 [gu2026](https://arxiv.org/abs/2604.08358) 的 Fig. 1a。
+{% include post-figure.html src="/images/blog/qec-decoders-overview/cascade_fig1a_architecture.png" alt="Cascade 的 embedding、bottleneck blocks 和 logical readout" caption="**图 5 · Cascade 的网络结构** 来源：[gu2026](https://arxiv.org/abs/2604.08358)，Fig. 1a。" %}
 
 Convolution 的邻居聚合可以写为
 
@@ -251,30 +247,28 @@ $$\delta(u,v)$$ 表示相对几何或连接关系。具有相同 relation type �
 
 最后，将 detector representations 映射到 data qubits，对 logical operator support 做 pooling，再由 MLP 输出 logical 翻转概率。
 
-需要注意的是，仅输出 logical class，无法提供区分末尾几轮数据错误和测量错误所需的完整信息。例如，在一个 distance 为 $$d$$ 的 surface code 中，考虑与两个 X-check 相邻的内部 data qubit。如果最后一轮这两个 checks 的测量结果都出错，观测就可能与该 data qubit 发生 Z flip 相同，在相应 noise model 下，后者甚至可能是更似然的解释。因此，通常只有得到足够后续轮次支持的 Pauli frame 才可靠，而仅输出 logical class 的 decoder 无法提供这一时间信息。对一般的容错量子计算架构而言，这种输出还不够，这也引出了下一节的 online decoding。
+> **个人看法。** 需要注意的是，仅输出 logical class，无法提供区分末尾几轮数据错误和测量错误所需的完整信息。例如，在一个 distance 为 $$d$$ 的 surface code 中，考虑与两个 X-check 相邻的内部 data qubit。如果最后一轮这两个 checks 的测量结果都出错，观测就可能与该 data qubit 发生 Z flip 相同，在相应 noise model 下，后者甚至可能是更似然的解释。因此，通常只有得到足够后续轮次支持的 Pauli frame 才可靠，而仅输出 logical class 的 decoder 无法提供这一时间信息。对一般的容错量子计算架构而言，这种输出还不够，这也引出了下一节的 online decoding。
 
 ## 4. Online decoders
 
 ### 为什么需要 online decoding？
 
-物理平台的两比特门时间、每个 cycle 的门数和并行度，共同决定 detector 数据的产生速度。要长期运行 QEC，decoder 的均摊处理时间需要小于物理 cycle 时间，否则待解码数据会不断积压。
+物理平台的两比特门时间、每个 cycle 的门数和并行度，共同决定 detector 数据的产生速度。要长期运行 QEC，**decoder 的均摊处理时间需要小于物理 cycle 时间**，否则待解码数据会不断积压。
 
-以 Gross $$[[144,12,12]]$$ code 为例，它使用 144 个 data qubits 和 144 个 measurement qubits。144 个 weight-6 checks 共需 $$144\times6=864$$ 个两比特门 [bravyi2024](https://arxiv.org/abs/2308.07915)。若将 X、Z checks 分组执行，可以构造 12-layer 示例 schedule，每层 72 个并行门。Google 在超导 surface-code 实验中报告了 $$1.1\,\mu\mathrm{s}$$/cycle，可作为超导平台的时间量级参考 [acharya2024](https://arxiv.org/abs/2408.13687)。
+以 Gross $$[[144,12,12]]$$ code 为例，它使用 144 个 data qubits 和 144 个 measurement qubits。144 个 weight-6 checks 共需 $$144\times6=864$$ 个两比特门 [bravyi2024](https://arxiv.org/abs/2308.07915)。若将 X、Z checks 分组执行，可以构造 12-layer 示例 schedule，每层 72 个并行门。Google 在超导 surface-code 实验中报告了 **1.1 μs/cycle**，可作为超导平台的时间量级参考 [acharya2024](https://arxiv.org/abs/2408.13687)。
 
-离子阱平台的门时间更长。Quantinuum Helios 的原生两比特操作约为 $$70\,\mu\mathrm{s}$$ [ransford2026](https://arxiv.org/abs/2511.05465)。Gross code 原论文的 Sec. 5 和 Table 5 给出了 7-layer schedule，在充分并行时，峰值为 144 个门同时执行。若将每个 controlled-NOT（CNOT）门的纠缠部分按一次原生 $$R_{ZZ}(\pi/2)$$ 操作估计，仅两比特操作就需要 $$7\times70\,\mu\mathrm{s}=0.49\,\mathrm{ms}$$。这一预算借用 Helios 的原生门时长进行外推，完整 QEC cycle 还需计入单比特旋转、搬运、冷却、测量和 reset。对于中性原子，代表性架构中的 QEC cycle 预算为毫秒量级 [sunami2025](https://arxiv.org/abs/2407.11111)。
+离子阱平台的门时间更长。Quantinuum Helios 的原生两比特操作约为 **70 μs** [ransford2026](https://arxiv.org/abs/2511.05465)。Gross code 原论文的 Sec. 5 和 Table 5 给出了 7-layer schedule，在充分并行时，峰值为 144 个门同时执行。若将每个 controlled-NOT（CNOT）门的纠缠部分按一次原生 $$R_{ZZ}(\pi/2)$$ 操作估计，仅两比特操作就需要 $$7\times70\,\mu\mathrm{s}=0.49\,\mathrm{ms}$$，即 **490 μs/cycle（仅计两比特操作）**。这一预算借用 Helios 的原生门时长进行外推，完整 QEC cycle 还需计入单比特旋转、搬运、冷却、测量和 reset。对于中性原子，代表性架构中的 QEC cycle 预算为毫秒量级 [sunami2025](https://arxiv.org/abs/2407.11111)。
 
-除了吞吐要求，还需要考虑纠错结果何时能够提交。有测量误差时，单轮观测通常不足以区分数据错误和测量错误，single-shot QEC 是特殊情况。多轮纠错的最新一轮仍然面临这个问题，需要借助后续数据确定较早轮次的 Pauli frame。
+除了吞吐要求，还需要考虑纠错结果何时能够提交。有测量误差时，单轮观测通常不足以区分数据错误和测量错误，除非采用 single-shot QEC。多轮纠错的最新一轮仍然面临这个问题，需要借助后续数据确定较早轮次的 Pauli frame。
 
-在通常需要 $$O(d)$$ 时间冗余的设置中，可以用额外等待约 $$d/2$$ 轮来理解这种延迟的量级。具体等待时间由 code、noise model 和 window 策略决定。因此，online decoder 既要跟上 detector 数据的产生速度，也要在有限延迟内持续输出可提交的 Pauli frame 更新。
+在通常需要 $$O(d)$$ 时间冗余的设置中，可以用额外等待约 $$d/2$$ 轮来理解这种延迟的量级。因此，online decoder 既要跟上 detector 数据的产生速度，也要在有限延迟内持续输出可提交的 Pauli frame 更新。
 
 ### Sliding window decoding
 
-Sliding window 是常用的 online decoding 方法 [skoric2023](https://arxiv.org/abs/2209.08552v2)。假设初始 boundary 的 Pauli frame 已知，取包含 $$R=2d$$ 轮的 window：前 $$d$$ 轮作为 commit region，后 $$d$$ 轮作为 buffer，为较早轮次提供额外测量信息。
+Sliding window 是常用的 online decoding 方法 [skoric2023](https://arxiv.org/abs/2209.08552v2)。假设初始 boundary 的 Pauli frame 已知，取包含 $$R=2d$$ 轮的 window：前 $$d$$ 轮作为 commit region，后 $$d$$ 轮作为 buffer，为较早轮次提供额外测量信息。Buffer 的末尾缺少后续观测，尚不足以排除测量错误的影响，因此不提交 buffer 中的 Pauli frame 估计。
 
 每次解码整个 window，只提交前 $$d$$ 轮的纠错结果。然后将 window 后移 $$d$$ 轮，以已提交结果更新 boundary，再重复上述过程。这样，解码可以随着 detector 数据到达而持续进行。
 
-![Sliding window 的 commit region 与后续 buffer](/images/blog/qec-decoders-overview/sliding_window_arxiv_fig2.png)
-
-Sliding window 示意，来自 [skoric2023](https://arxiv.org/abs/2209.08552v2) 的 Fig. 2。$$R=2d$$、每次提交 $$d$$ 轮是这里采用的示例设置。
+{% include post-figure.html src="/images/blog/qec-decoders-overview/sliding_window_arxiv_fig2.png" alt="Sliding window 的 commit region 与后续 buffer" caption="**图 6 · Sliding window 的 commit region 与 buffer** 来源：[skoric2023](https://arxiv.org/abs/2209.08552v2)，Fig. 2。这里采用 $$R=2d$$、每次提交 $$d$$ 轮的示例设置。" %}
 
 如果计算资源充足，可以采用 parallel window decoding。第一层将时间序列拆成多个 windows，在前后 buffers 的保护下并行解码并提交各 window 的中间区域。第二层以这些已提交结果为 boundary，再处理剩余区域。通过两层 window，长时间序列的解码可以分配给多个 workers [skoric2023](https://arxiv.org/abs/2209.08552v2)。
