@@ -15,7 +15,7 @@ permalink: /zh/blog/2026/qec-decoders-overview/
 
 先统一三个术语。**Mechanism** 是候选错误机制及其对应的二值变量，在文献中也称为 error、error mechanism 或 variable。$$x_i=1$$ 表示第 $$i$$ 个 mechanism 发生，$$x_i=0$$ 表示未发生。$$x$$ 是全部 mechanisms 的构型，$$p_i$$ 是第 $$i$$ 个 mechanism 的 prior probability。
 
-**Detector** 是用于检测错误的校验量。在重复 syndrome extraction 中，它通常是**同一 stabilizer 在相邻两轮的 syndrome 测量结果的模 2 差分**。若 $$m_{c,t}$$ 表示第 $$t$$ 轮对 stabilizer $$c$$ 的 syndrome 测量结果，则 $$s_{c,t}=m_{c,t}\oplus m_{c,t-1}$$。因此，detector 检测的是 syndrome 的变化。$$s_a=1$$ 表示第 $$a$$ 个 detector 被触发，$$s_a=0$$ 表示未触发，$$s$$ 是全部 detectors 的取值向量。下文将 detector event 或 detection event 统一称为“触发的 detector”。**Logical** 是所跟踪的逻辑可观测量，$$\ell_\alpha=1$$ 表示第 $$\alpha$$ 个 logical 发生翻转，$$\ell$$ 是全部 logical 的翻转向量。
+**Detector** 是用于检测错误的校验量。在重复 syndrome extraction 中，它通常是**同一 stabilizer 在相邻两轮的 syndrome 测量结果的模 2 差分**。若 $$m_{c,t}$$ 表示第 $$t$$ 轮对 stabilizer $$c$$ 的 syndrome 测量结果，则 $$s_{c,t}=m_{c,t}\oplus m_{c,t-1}$$。$$s_a=1$$ 表示第 $$a$$ 个 detector 被触发，$$s_a=0$$ 表示未触发，$$s$$ 是全部 detectors 的取值向量。下文将 detector event 或 detection event 统一称为“触发的 detector”。**Logical** 是所跟踪的逻辑可观测量，$$\ell_\alpha=1$$ 表示第 $$\alpha$$ 个 logical 发生翻转，$$\ell$$ 是全部 logical 的翻转向量。
 
 Mechanisms 对 detectors 和 logical 的影响分别由二元线性映射 $$H$$ 和 $$A$$ 描述。以下等式在 $$\mathbb F_2$$ 上成立：
 
@@ -37,7 +37,7 @@ Noise model 决定我们使用什么 mechanisms。**Circuit-level noise** 对应
 
 这一节介绍 MWPM、BP 及其后处理方法，以及 Tesseract。其中，Tesseract 的 logical error rate 达到了 state of the art 水平，但速度较慢。RelayBP 的速度相对较快，准确度则略逊一筹。
 
-> **个人看法。** 我认为，以 Tesseract 为参照，经典 decoder 在准确度上的提升空间已经比较有限。比较解码结果与真实构型的似然度会发现，在多数解码失败的样本中，解码结果的似然度反而更高，也就是说，即使找到了最似然构型，也无法纠正这类错误。因而，更多工作可以着眼于缩短解码时间。一种思路是将多个 decoder 分层组合：先使用较弱但快速的 decoder，对未能解码或结果可疑的样本，再调用更强但更慢的 decoder，并逐层升级。在低物理错误率下，多数 shots 中的错误都很 local，几轮 BP 就能处理，只有少数困难构型需要复杂的 decoder。Mitten codes 论文中的 telescoping decoder 就采用了这种思路 [bhardwaj2026](https://arxiv.org/abs/2607.28795)。
+> **个人看法：** 我认为，以 Tesseract 为参照，经典 decoder 在准确度上的提升空间已经比较有限。比较解码结果与真实构型的似然度会发现，在多数解码失败的样本中，解码结果的似然度反而更高，也就是说，即使找到了最似然构型，也无法纠正这类错误。因而，更多工作可以着眼于缩短解码时间。一种思路是将多个 decoder 分层组合：先使用较弱但快速的 decoder，对未能解码或结果可疑的样本，再调用更强但更慢的 decoder，并逐层升级。在低物理错误率下，多数 shots 中的错误都很 local，几轮 BP 就能处理，只有少数困难构型需要复杂的 decoder。Mitten codes 论文中的 telescoping decoder 就采用了这种思路 [bhardwaj2026](https://arxiv.org/abs/2607.28795)。
 
 ### Minimum weight perfect matching
 
@@ -171,7 +171,7 @@ $$
 
 可以将 BF-OSD 理解为一种似然度优先搜索，其形式类似 Dijkstra 最短路算法。搜索从空集合 $$T=\varnothing$$ 开始，用 priority queue 保存候选。每次取出已生成候选中评分最高的 $$T$$，检查是否改善当前最优解，然后生成 $$T'=T\cup\{j\}$$。规定 $$j>\max T$$，并令 $$\max\varnothing=0$$，可以避免重复生成同一组合。Query budget 耗尽后返回已找到的最佳构型。
 
-> **个人看法。** 尽管搜索框架有所创新，BF-OSD 的表现并没有比 LSD 好很多。我认为，一个可能的原因是：Dijkstra 算法中的路径距离随扩展单调增加，而这里的似然度并不随生成元的加入单调变化。如果从初始猜测 $$x_0$$ 到最似然构型 $$x$$ 必须跨过一个 energy barrier，那么在有限的 query budget 内，搜索可能始终无法越过低评分的中间候选，使最优构型没有机会进入 priority queue。
+> **个人看法：** 尽管搜索框架有所创新，BF-OSD 的表现并没有比 LSD 好很多。我认为，一个可能的原因是：Dijkstra 算法中的路径距离随扩展单调增加，而这里的似然度并不随生成元的加入单调变化。如果从初始猜测 $$x_0$$ 到最似然构型 $$x$$ 必须跨过一个 energy barrier，那么在有限的 query budget 内，搜索可能始终无法越过低评分的中间候选，使最优构型没有机会进入 priority queue。
 
 ### Tesseract：A* 与 beam search
 
@@ -247,7 +247,7 @@ $$\delta(u,v)$$ 表示相对几何或连接关系。具有相同 relation type �
 
 最后，将 detector representations 映射到 data qubits，对 logical operator support 做 pooling，再由 MLP 输出 logical 翻转概率。
 
-> **个人看法。** 需要注意的是，仅输出 logical class，无法提供区分末尾几轮数据错误和测量错误所需的完整信息。例如，在一个 distance 为 $$d$$ 的 surface code 中，考虑与两个 X-check 相邻的内部 data qubit。如果最后一轮这两个 checks 的测量结果都出错，观测就可能与该 data qubit 发生 Z flip 相同，在相应 noise model 下，后者甚至可能是更似然的解释。因此，通常只有得到足够后续轮次支持的 Pauli frame 才可靠，而仅输出 logical class 的 decoder 无法提供这一时间信息。对一般的容错量子计算架构而言，这种输出还不够，这也引出了下一节的 online decoding。
+> **个人看法：** 需要注意的是，仅输出 logical class，无法提供区分末尾几轮数据错误和测量错误所需的完整信息。例如，在一个 distance 为 $$d$$ 的 surface code 中，考虑与两个 X-check 相邻的内部 data qubit。如果最后一轮这两个 checks 的测量结果都出错，观测就可能与该 data qubit 发生 Z flip 相同，在相应 noise model 下，后者甚至可能是更似然的解释。因此，通常只有得到足够后续轮次支持的 Pauli frame 才可靠，而仅输出 logical class 的 decoder 无法提供这一时间信息。对一般的容错量子计算架构而言，这种输出还不够，这也引出了下一节的 online decoding。
 
 ## 4. Online decoders
 
