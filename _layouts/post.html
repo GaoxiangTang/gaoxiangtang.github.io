@@ -10,6 +10,8 @@ layout: default
 <div class="post-body">
   {{ content }}
 </div>
+{% unless page.show_citation == false %}
 {% include post-citation.html %}
+{% endunless %}
 {% include post-feedback.html %}
 <p class="post-back"><a href="{{ locale.home_url | append: '#blogs' | relative_url }}">← {{ locale.back_to_blogs }}</a></p>

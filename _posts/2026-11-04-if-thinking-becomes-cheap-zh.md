@@ -4,7 +4,8 @@ date: 2026-11-04 00:00:00 +0800
 layout: post
 lang: zh
 translation_key: if-thinking-becomes-cheap
-tags: ["AI"]
+tags: ["观点"]
+show_citation: false
 slug: if-thinking-becomes-cheap
 permalink: /zh/blog/2026/if-thinking-becomes-cheap/
 ---

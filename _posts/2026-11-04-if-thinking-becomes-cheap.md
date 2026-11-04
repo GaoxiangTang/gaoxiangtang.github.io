@@ -4,7 +4,8 @@ date: 2026-11-04 00:00:00 +0800
 layout: post
 lang: en
 translation_key: if-thinking-becomes-cheap
-tags: ["AI"]
+tags: ["perspective"]
+show_citation: false
 slug: if-thinking-becomes-cheap
 permalink: /blog/2026/if-thinking-becomes-cheap/
 ---
